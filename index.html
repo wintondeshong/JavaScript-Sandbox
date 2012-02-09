@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-Equiv="Cache-Control" Content="no-cache">
+  <meta http-Equiv="Pragma" Content="no-cache">
+  <meta http-Equiv="Expires" Content="0">
+
+  <title>JavaScript Sandbox | jQuery, HamlJS, UnderscoreJS</title>
+
+  <!-- Include Project Specific StyleSheets -->
+
+  <!-- JavaScript Dependencies -->
+  <script type="text/javascript" src="vendor/jquery-1.6.2.min.js"></script>
+  <!-- @see https://github.com/rmw/haml-js/blob/master/lib/haml.js -->
+  <script type="text/javascript" src="vendor/haml.debug.js"></script>
+  <!-- @see http://documentcloud.github.com/underscore/ -->
+  <script type="text/javascript" src="vendor/underscore-1.3.1.debug.js"></script>
+  <script type="text/javascript" src="lib/template_manager.js"></script>
+</head>
+<body>
+  <!-- ############################################ -->
+  <!-- ##  Application Shell                     ## -->
+  <!-- ############################################ -->
+  <div id="content">
+    <!-- template gets appended here -->
+  </div>
+
+  <!-- ############################################ -->
+  <!-- ##  Templates                             ## -->
+  <!-- ############################################ -->
+  <script id="templateDefault" type="text/haml-js-tmpl">
+#my-div-id Sample DIV with id
+.my-div-class Sample DIV with class
+%h1 Sample heading 1
+%a{ href: "http://www.google.com", title: "google" } Google
+%h2 Hello #{name}! Using data!
+  </script>
+
+  <!-- ############################################ -->
+  <!-- ##  Application BootStrapping             ## -->
+  <!-- ############################################ -->
+  <script type="text/javascript">
+  $(function () {
+    // setup shared variables
+    var templates = new com.wintondeshong.util.TemplateManager(),
+        $applicationShell = $('#content');
+
+    // initialize templates in DOM
+    templates.initialize();
+
+    // compile specific template
+    var renderedHTML = templates.templateDefault({ 
+      name: "Winton" 
+    });
+
+    // append rendered html into application shell!
+    $applicationShell.html(renderedHTML);
+  });
+  </script>
+</body>
+</html>
